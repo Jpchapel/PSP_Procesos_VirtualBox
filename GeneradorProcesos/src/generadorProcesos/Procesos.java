@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package generadorProcesos;
 
 import java.io.BufferedReader;
@@ -17,6 +16,7 @@ import java.util.List;
  * @author Stream
  */
 public class Procesos {
+
     private final Process proceso;
     private BufferedReader brProceso;
     private PrintStream psProceso;
@@ -48,6 +48,15 @@ public class Procesos {
 
     public String leer() throws IOException {
         return brProceso.readLine();
+    }
+
+    public String leerLíneas() throws IOException {
+        String línea;
+        StringBuilder resultado = new StringBuilder();
+        while ((línea = brProceso.readLine()) != null) {
+            resultado.append(línea).append("\n");
+        }
+        return resultado.toString();
     }
 
     public void fin() throws IOException {

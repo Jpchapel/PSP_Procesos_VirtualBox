@@ -40,13 +40,14 @@ public class Examen {
             try {
                 respuesta = sc.nextInt();
 
-                if (respuesta < 0 || respuesta > 3) {
+                if (respuesta < 1 || respuesta > 3) {
                     System.out.println("Opcion incorrecta. Introduzca opcion valida");
-                }
-                if (respuesta == 1) {
-                    verMaquinas();
-                } else if (respuesta == 2) {
-                    crearMaquinas(args);
+                } else {
+                    if (respuesta == 1) {
+                        verMaquinas();
+                    } else if (respuesta == 2) {
+                        crearMaquinas(args);
+                    }
                 }
             } catch (InputMismatchException ex) {
                 System.out.println("Entrada Incorrecta. Introduzca un numero del 1 al 3");
@@ -116,7 +117,7 @@ public class Examen {
 
     private void procesoNombrarMaquina(String nombreMaquina) {
         Procesos proceso = null;
-        
+
         try {
             ArrayList<String> values = new ArrayList<>();
             values.add("C:\\Program Files\\Oracle\\VirtualBox\\vboxmanage");
@@ -132,7 +133,7 @@ public class Examen {
             }
         } catch (IOException ex) {
             Logger.getLogger(Examen.class.getName()).log(Level.SEVERE, null, ex);
-        }finally {
+        } finally {
             try {
                 proceso.fin();
             } catch (IOException ex) {
@@ -143,7 +144,7 @@ public class Examen {
 
     private void procesoSOMaquina(String nombreMaquina, String sistema) {
         Procesos proceso = null;
-        
+
         try {
             ArrayList<String> values = new ArrayList<>();
             values.add("C:\\Program Files\\Oracle\\VirtualBox\\vboxmanage");
@@ -153,10 +154,10 @@ public class Examen {
             values.add(sistema);
 
             proceso = new Procesos(values);
-            
+
         } catch (IOException ex) {
             Logger.getLogger(Examen.class.getName()).log(Level.SEVERE, null, ex);
-        }finally {
+        } finally {
             try {
                 proceso.fin();
             } catch (IOException ex) {
@@ -167,7 +168,7 @@ public class Examen {
 
     private void procesoRAMMaquina(String nombreMaquina, String memoria) {
         Procesos proceso = null;
-        
+
         try {
             ArrayList<String> values = new ArrayList<>();
             values.add("C:\\Program Files\\Oracle\\VirtualBox\\vboxmanage");
@@ -177,10 +178,10 @@ public class Examen {
             values.add(memoria);
 
             proceso = new Procesos(values);
-            
+
         } catch (IOException ex) {
             Logger.getLogger(Examen.class.getName()).log(Level.SEVERE, null, ex);
-        }finally {
+        } finally {
             try {
                 proceso.fin();
             } catch (IOException ex) {
