@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package examen;
+package virtualBox;
 
-import generadorProcesos.Procesos;
+import generadorProcesos.GeneradorProcesos;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
@@ -17,14 +17,14 @@ import java.util.logging.Logger;
  *
  * @author Stream
  */
-public class Examen {
+public class VirtualBox {
 
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        Examen examen = new Examen();
-        examen.go(args);
+        VirtualBox virtualbox = new VirtualBox();
+        virtualbox.go(args);
     }
 
     private void go(String[] args) {
@@ -58,7 +58,7 @@ public class Examen {
 
     private void verMaquinas() {
 
-        Procesos procesoVer = null;
+        GeneradorProcesos procesoVisor = null;
 
         try {
             ArrayList<String> values = new ArrayList<>();
@@ -66,26 +66,22 @@ public class Examen {
             values.add("list");
             values.add("vms");
 
-            procesoVer = new Procesos(values);
+            procesoVisor = new GeneradorProcesos(values);
             String salida;
-            while ((salida = procesoVer.leer()) != null) {
+            while ((salida = procesoVisor.leer()) != null) {
                 System.out.println(salida);
             }
         } catch (IOException ex) {
-            Logger.getLogger(Examen.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(VirtualBox.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
-            try {
-                procesoVer.fin();
-            } catch (IOException ex) {
-                Logger.getLogger(Examen.class.getName()).log(Level.SEVERE, null, ex);
-            }
+                procesoVisor.fin();
         }
     }
 
     private void crearMaquinas(String[] args) {
-        Procesos procesoCreador = null;
+        GeneradorProcesos procesoCreador = null;
         try {
-            procesoCreador = new Procesos("java -cp C:\\Users\\Stream\\Desktop\\Clases\\REPETIR\\REPASOPSP\\LectorCSV\\build\\classes lectorcsv.LectorCSV " + args[0] + " " + args[1]);
+            procesoCreador = new GeneradorProcesos("java -cp C:\\Users\\Stream\\Desktop\\Clases\\REPETIR\\REPASOPSP\\LectorCSV\\build\\classes lectorcsv.LectorCSV " + args[0] + " " + args[1]);
             String salida;
             while ((salida = procesoCreador.leer()) != null) {
                 String[] datos = salida.split(" ");
@@ -102,21 +98,17 @@ public class Examen {
             }
 
         } catch (IOException ex) {
-            Logger.getLogger(Examen.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(VirtualBox.class.getName()).log(Level.SEVERE, null, ex);
         } catch (InterruptedException ex) {
-            Logger.getLogger(Examen.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(VirtualBox.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
-            try {
                 procesoCreador.fin();
-            } catch (IOException ex) {
-                Logger.getLogger(Examen.class.getName()).log(Level.SEVERE, null, ex);
-            }
         }
 
     }
 
     private void procesoNombrarMaquina(String nombreMaquina) {
-        Procesos proceso = null;
+        GeneradorProcesos proceso = null;
 
         try {
             ArrayList<String> values = new ArrayList<>();
@@ -126,24 +118,20 @@ public class Examen {
             values.add(nombreMaquina);
             values.add("-register");
 
-            proceso = new Procesos(values);
+            proceso = new GeneradorProcesos(values);
             String salida;
             while ((salida = proceso.leer()) != null) {
                 System.out.println(salida);
             }
         } catch (IOException ex) {
-            Logger.getLogger(Examen.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(VirtualBox.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
-            try {
                 proceso.fin();
-            } catch (IOException ex) {
-                Logger.getLogger(Examen.class.getName()).log(Level.SEVERE, null, ex);
-            }
         }
     }
 
     private void procesoSOMaquina(String nombreMaquina, String sistema) {
-        Procesos proceso = null;
+        GeneradorProcesos proceso = null;
 
         try {
             ArrayList<String> values = new ArrayList<>();
@@ -153,21 +141,17 @@ public class Examen {
             values.add("--ostype");
             values.add(sistema);
 
-            proceso = new Procesos(values);
+            proceso = new GeneradorProcesos(values);
 
         } catch (IOException ex) {
-            Logger.getLogger(Examen.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(VirtualBox.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
-            try {
                 proceso.fin();
-            } catch (IOException ex) {
-                Logger.getLogger(Examen.class.getName()).log(Level.SEVERE, null, ex);
-            }
         }
     }
 
     private void procesoRAMMaquina(String nombreMaquina, String memoria) {
-        Procesos proceso = null;
+        GeneradorProcesos proceso = null;
 
         try {
             ArrayList<String> values = new ArrayList<>();
@@ -177,16 +161,12 @@ public class Examen {
             values.add("--memory");
             values.add(memoria);
 
-            proceso = new Procesos(values);
+            proceso = new GeneradorProcesos(values);
 
         } catch (IOException ex) {
-            Logger.getLogger(Examen.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(VirtualBox.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
-            try {
                 proceso.fin();
-            } catch (IOException ex) {
-                Logger.getLogger(Examen.class.getName()).log(Level.SEVERE, null, ex);
-            }
         }
     }
 
